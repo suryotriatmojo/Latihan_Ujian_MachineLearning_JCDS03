@@ -34,14 +34,17 @@ model_indo = linear_model.LinearRegression()
 x_max_2010 = max_2010.columns.values.reshape(-1, 1)
 y_max_2010 = max_2010.values[0]
 model_max_2010.fit(x_max_2010, y_max_2010)
+print('Akurasi prediksi {} = {}'.format(max_2010.index[0], round(model_max_2010.score(x_max_2010, y_max_2010), 3)))
 
 x_min_1971 = min_1971.columns.values.reshape(-1, 1)
 y_min_1971 = min_1971.values[0]
 model_min_1971.fit(x_min_1971, y_min_1971)
+print('Akurasi prediksi {} = {}'.format(min_1971.index[0], round(model_min_1971.score(x_min_1971, y_min_1971), 3)))
 
 x_indo = indo.columns.values.reshape(-1, 1)
 y_indo = indo.values[0]
 model_indo.fit(x_indo, y_indo)
+print('Akurasi prediksi {} = {}'.format(indo.index[0], round(model_indo.score(x_indo, y_indo), 3)))
 
 # 2050 prediction
 max_2010_2050 = model_max_2010.predict([[2050]])
@@ -52,42 +55,42 @@ print('Prediksi jumlah penduduk {} di tahun 2050: {}'.format(max_2010.index[0], 
 print('Prediksi jumlah penduduk {} di tahun 2050: {}'.format(min_1971.index[0], int(min_1971_2050[0])))
 print('Prediksi jumlah penduduk {} di tahun 2050: {}'.format(indo.index[0], int(indo_2050[0])))
 
-# plot figure
-plt.figure('Prediksi Populasi {}'.format(indo.index[0]), figsize = (12,8))
-plt.style.use('seaborn-darkgrid')
+# # plot figure
+# plt.figure('Prediksi Populasi {}'.format(indo.index[0]), figsize = (12,8))
+# plt.style.use('seaborn-darkgrid')
 
-# plot real data
-plt.plot(max_2010.columns.values, max_2010.iloc[0], marker = 'o', label = max_2010.index[0], color = 'green')
-plt.plot(min_1971.columns.values, min_1971.iloc[0], marker = 'o', label = min_1971.index[0], color = 'blue')
-plt.plot(indo.columns.values, indo.iloc[0], marker = 'o', label = indo.index[0], color = 'red')
+# # plot real data
+# plt.plot(max_2010.columns.values, max_2010.iloc[0], marker = 'o', label = max_2010.index[0], color = 'green')
+# plt.plot(min_1971.columns.values, min_1971.iloc[0], marker = 'o', label = min_1971.index[0], color = 'blue')
+# plt.plot(indo.columns.values, indo.iloc[0], marker = 'o', label = indo.index[0], color = 'red')
 
-# plot best fit data => y = mx + c
-plt.plot(
-    max_2010.columns.values,
-    model_max_2010.coef_ * max_2010.columns.values + model_max_2010.intercept_,
-    color = 'yellow',
-    alpha = 0.5
-)
-plt.plot(
-    min_1971.columns.values,
-    model_min_1971.coef_ * min_1971.columns.values + model_min_1971.intercept_,
-    color = 'yellow',
-    alpha = 0.5
-)
-plt.plot(
-    indo.columns.values,
-    model_indo.coef_ * indo.columns.values + model_indo.intercept_,
-    label = 'Best Fit Line',
-    color = 'yellow',
-    alpha = 0.5
-)
+# # plot best fit data => y = mx + c
+# plt.plot(
+#     max_2010.columns.values,
+#     model_max_2010.coef_ * max_2010.columns.values + model_max_2010.intercept_,
+#     color = 'yellow',
+#     alpha = 0.5
+# )
+# plt.plot(
+#     min_1971.columns.values,
+#     model_min_1971.coef_ * min_1971.columns.values + model_min_1971.intercept_,
+#     color = 'yellow',
+#     alpha = 0.5
+# )
+# plt.plot(
+#     indo.columns.values,
+#     model_indo.coef_ * indo.columns.values + model_indo.intercept_,
+#     label = 'Best Fit Line',
+#     color = 'yellow',
+#     alpha = 0.5
+# )
 
-plt.title('Jumlah Penduduk {} (1971 - 2000)'.format(indo.index[0]))
-plt.xlabel('Tahun')
-plt.ylabel('Jumlah Penduduk (Ratus Juta Jiwa)')
-plt.legend()
+# plt.title('Jumlah Penduduk {} (1971 - 2000)'.format(indo.index[0]))
+# plt.xlabel('Tahun')
+# plt.ylabel('Jumlah Penduduk (Ratus Juta Jiwa)')
+# plt.legend()
 
-plt.grid(True)
-plt.tight_layout()
+# plt.grid(True)
+# plt.tight_layout()
 
-plt.show()
+# plt.show()
